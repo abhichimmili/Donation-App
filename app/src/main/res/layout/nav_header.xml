@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:elevation="10dp"
+    android:layout_height="200dp"
+    android:background="@drawable/nav">
+        <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <!-- Profile Photo -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/noimg"
+                />
+        <ImageButton
+            android:id="@+id/btnChangePhoto"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/edit_circle_background"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Edit Profile Photo"
+            android:padding="16dp"
+            android:clickable="true"
+            app:tint="@android:color/white" />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:textColor="@color/white"
+        android:layout_margin="8dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/andikaregular"/>
+
+</LinearLayout>

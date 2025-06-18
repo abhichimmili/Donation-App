@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/infoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You have selected to donate [Item Type] to Orphanage Name."
+        android:textSize="16sp"
+        android:gravity="center"
+        android:fontFamily="@font/andikabolditalic"
+        android:textColor="#666666"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Describe your donation:"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/donationDescriptionInput"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:hint="e.g., '3 boxes of non-perishable food', 'gently used winter coats'"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pickup/Drop-off Option:"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/pickupOptionSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="@drawable/spinner_background"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/confirmDonationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONFIRM DONATION"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/andikabold"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="#02bdb1"
+        app:cornerRadius="12dp"/>
+
+</LinearLayout>

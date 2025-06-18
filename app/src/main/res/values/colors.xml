@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#0097b2</color>
+    <color name="bluegreen">#02bdb1</color>
+    <color name="red">#CF3242</color>
+    <color name="yellow">#ffd600</color>
+    <color name="grey">#A9A7A7</color>
+    <color name="colorDonate">#FFF7AE</color>
+    <color name="colorPurchase">#FDAAC6</color>
+    <color name="colorVolunteer">#AAFBAE</color>
+    <color name="colorEvents">#CBADFF</color>
+
 </resources>

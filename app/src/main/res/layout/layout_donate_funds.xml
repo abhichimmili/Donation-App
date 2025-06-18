@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/infoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You are donating funds to Orphanage Name."
+        android:textSize="16sp"
+        android:gravity="center"
+        android:fontFamily="@font/andikabolditalic"
+        android:textColor="#666666"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Donation Amount:"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/amountInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter amount"
+        android:textColor="@color/black"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp">
+
+        <Button
+            android:id="@+id/btn10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$10"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            app:backgroundTint="#ffd600"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn25"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$25"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            app:backgroundTint="#ffd600"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn50"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$50"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            app:backgroundTint="#ffd600"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn100"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$100"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            app:backgroundTint="#ffd600"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Payment Method"
+        android:textSize="15sp"
+        android:layout_marginLeft="8dp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
+
+    <RadioGroup
+        android:id="@+id/paymentMethodGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp">
+
+        <RadioButton
+            android:id="@+id/radioCreditCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Credit Card"
+            android:drawablePadding="8dp"
+            android:padding="12dp"
+            android:buttonTint="#F4680A"
+            android:background="@drawable/radio_button_selector"
+            android:layout_marginBottom="8dp" />
+
+        <RadioButton
+            android:id="@+id/radioPayPal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PayPal"
+            android:drawablePadding="8dp"
+            android:padding="12dp"
+            android:buttonTint="#F4680A"
+            android:background="@drawable/radio_button_selector"
+            android:layout_marginBottom="8dp" />
+
+        <RadioButton
+            android:id="@+id/radioGooglePay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Google Pay"
+            android:drawablePadding="8dp"
+            android:padding="12dp"
+            android:buttonTint="#F4680A"
+            android:background="@drawable/radio_button_selector" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/donateNowButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DONATE NOW"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/andikabold"
+        android:textStyle="bold"
+        app:backgroundTint="#02bdb1"
+        app:cornerRadius="12dp"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>
