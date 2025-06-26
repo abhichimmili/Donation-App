@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/app_bg"
     tools:openDrawer="start"
     tools:context=".MainActivity">
 
@@ -18,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:id="@+id/toolbar"
-            android:elevation="8dp"
+            android:elevation="5dp"
             app:title="Donate Nearby"
             app:titleTextColor="@color/white"
             android:background="@color/bluegreen"
@@ -35,18 +34,17 @@
             android:id="@+id/bottomNavigationView"
             android:background="@color/bluegreen"
             app:labelVisibilityMode="labeled"
-            app:itemIconSize="30dp"
+            app:itemIconSize="32dp"
             android:elevation="5dp"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
             app:menu="@menu/bottom_menu"/>
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="270dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:id="@+id/nav_view"
         android:layout_gravity="start"
-        android:background="@drawable/app_bg"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
         app:itemIconTint="@color/bluegreen"
