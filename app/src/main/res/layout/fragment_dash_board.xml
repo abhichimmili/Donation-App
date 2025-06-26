@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/app_bg"
+    tools:context=".DashBoardFragment"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Donations"
+        android:textSize="28sp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/toggleGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/title"
+        android:layout_marginHorizontal="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <RadioButton
+            android:id="@+id/radioDonations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Donations"
+            android:buttonTint="#02bdb1"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:id="@+id/radioPurchases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Purchases"
+            android:buttonTint="#ffd600"
+            android:textColor="@color/black"
+            android:layout_marginStart="16dp"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/summaryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toggleGroup"
+        android:layout_marginHorizontal="14dp"
+        android:paddingVertical="10dp"
+        android:background="#ffd600"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/summaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Donated"
+            android:textSize="18sp"
+            android:textColor="#0097b2"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/amountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$1,200"
+            android:textSize="30sp"
+            android:textColor="#0097b2"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/historyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History"
+        android:textSize="20sp"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:layout_below="@id/summaryLayout"
+        android:layout_marginTop="10dp" />
+
+    <ListView
+        android:id="@+id/historyList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/historyTitle"
+        android:layout_marginTop="8dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:background="#FFFFFF" />
+</RelativeLayout>

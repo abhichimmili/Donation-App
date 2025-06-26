@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/sell"
+        android:icon="@drawable/baseline_sell_24"
+        android:title="Sell"/>
+    <item android:id="@+id/orphhome"
+        android:icon="@drawable/outline_home_24"
+        android:title="Home"/>
+    <item android:id="@+id/dashboard"
+        android:icon="@drawable/baseline_dashboard_24"
+        android:title="Dashboard"/>
+</menu>

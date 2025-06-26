@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_bg"
+    tools:context=".SellFragment">
+
+    <!-- Header: SELL -->
+    <TextView
+        android:id="@+id/text_sell_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SELL ITEMS"
+        android:fontFamily="@font/andikabold"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#0097b2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Subtitle: Add Item -->
+    <TextView
+        android:id="@+id/text_add_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Item"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_sell_header" />
+
+    <!-- Image Placeholder -->
+    <ImageView
+        android:id="@+id/image_placeholder"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFC107"
+        android:contentDescription="Image Placeholder"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_add_item" />
+
+    <!-- Add Photo Button -->
+    <Button
+        android:id="@+id/button_add_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Photo"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#00BCD4"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:stateListAnimator="@null"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/image_placeholder"
+        app:layout_constraintStart_toEndOf="@id/image_placeholder"
+        app:layout_constraintTop_toTopOf="@id/image_placeholder"
+        app:layout_constraintVertical_bias="0.5"
+        android:layout_marginStart="40dp" />
+
+    <!-- Title Input Field -->
+    <EditText
+        android:id="@+id/edit_text_title"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Title"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@drawable/rounded_edittext_blue_bg"
+        android:textColorHint="#E0E0E0"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:inputType="textCapSentences"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_placeholder" />
+
+    <!-- Price Input Field -->
+    <EditText
+        android:id="@+id/edit_text_price"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="$ Price"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@drawable/rounded_edittext_blue_bg"
+        android:textColorHint="#E0E0E0"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:inputType="numberDecimal"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_title" />
+
+    <!-- Description Input Field -->
+    <EditText
+        android:id="@+id/edit_text_description"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:hint="Description"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:gravity="top"
+        android:background="@drawable/rounded_edittext_blue_bg"
+        android:textColorHint="#E0E0E0"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:inputType="textMultiLine"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_price" />
+
+    <!-- Sell Online Button -->
+    <Button
+        android:id="@+id/button_sell_online"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="SELL ONLINE"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFC107"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="28dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

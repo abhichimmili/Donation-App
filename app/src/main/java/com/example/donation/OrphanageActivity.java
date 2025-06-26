@@ -46,10 +46,9 @@ import java.io.OutputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class OrphanageActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     BottomNavigationView bottomNavigationView;
-
     ActionBarDrawerToggle toggle;
     private static final int REQUEST_PERMISSION_READ_STORAGE = 100;
     CircleImageView ivProfilePhoto;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_orphanage);
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout), (v, insets) -> {
 //            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -81,12 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (currentFragment instanceof HomeFragment) {
-                bottomNavigationView.setSelectedItemId(R.id.home);
-            } else if (currentFragment instanceof DonateFragment) {
-                bottomNavigationView.setSelectedItemId(R.id.donation);
-            } else if (currentFragment instanceof PurchaseFragment) {
-                bottomNavigationView.setSelectedItemId(R.id.purchase);
+            if (currentFragment instanceof OrphHomeFragment) {
+                bottomNavigationView.setSelectedItemId(R.id.orphhome);
+            } else if (currentFragment instanceof DashBoardFragment) {
+                bottomNavigationView.setSelectedItemId(R.id.dashboard);
+            } else if (currentFragment instanceof SellFragment) {
+                bottomNavigationView.setSelectedItemId(R.id.sell);
             }
             // add other fragments as needed
         });
@@ -100,19 +99,20 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 item.setChecked(true);
                 int id = item.getItemId();
-                if (id == R.id.home) {
-                    Toast.makeText(MainActivity.this, "Home clicked", Toast.LENGTH_SHORT).show();
+                if (id == R.id.orphhome) {
+                    Toast.makeText(OrphanageActivity.this, "Home clicked", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.profile) {
-                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    startActivity(new Intent(OrphanageActivity.this, ProfileActivity.class));
                 } else if (id == R.id.settings) {
-                    Toast.makeText(MainActivity.this, "Settings clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrphanageActivity.this, "Settings clicked", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.about) {
-                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                    startActivity(new Intent(OrphanageActivity.this, ProfileActivity.class));
+
                 } else if (id == R.id.logout) {
                     // Clear login info and logout
                     getSharedPreferences("MyPrefs", MODE_PRIVATE).edit().clear().apply();
-                    Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    Toast.makeText(OrphanageActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(OrphanageActivity.this, LoginActivity.class));
                     finish();
                 }
 
@@ -121,28 +121,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if(savedInstanceState==null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.home);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new OrphHomeFragment()).commit();
+            navigationView.setCheckedItem(R.id.orphhome);
         }
-        replaceFragment(new HomeFragment());
+        replaceFragment(new OrphHomeFragment());
 //        bottomNavigationView.setBackground(null);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-                int id = item.getItemId();
+            int id = item.getItemId();
 
-                if (id == R.id.home) {
-                    replaceFragment(new HomeFragment());
-                    return true;
-                } else if (id == R.id.purchase) {
-                    replaceFragment(new PurchaseFragment());
-                    return true;
-                } else if (id == R.id.donation) {
-                    replaceFragment(new DonateFragment());
-                    return true;
-                }
+            if (id == R.id.orphhome) {
+                replaceFragment(new OrphHomeFragment());
+                return true;
+            } else if (id == R.id.sell) {
+                replaceFragment(new SellFragment());
+                return true;
+            } else if (id == R.id.dashboard) {
+                replaceFragment(new DashBoardFragment());
+                return true;
+            }
 
-                return false;
-            });
-        bottomNavigationView.setSelectedItemId(R.id.home);
+            return false;
+        });
+        bottomNavigationView.setSelectedItemId(R.id.orphhome);
 
         View headerView = navigationView.getHeaderView(0);
         ivProfilePhoto = headerView.findViewById(R.id.ivProfile);
@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 .child(userType)
                 .child(userId);
 
-        userRef.child("name").get().addOnCompleteListener(task -> {
+        userRef.child("contactPerson").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 String name = task.getResult().getValue(String.class);
                 if (name != null) {
@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                     userName.setText("Name not found");
                 }
             } else {
-                Toast.makeText(MainActivity.this, "Failed to load name", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrphanageActivity.this, "Failed to load name", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
-            if (currentFragment instanceof HomeFragment) {
+            if (currentFragment instanceof OrphHomeFragment) {
                 // Show exit confirmation
                 new AlertDialog.Builder(this)
                         .setTitle("Exit App")

@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             if ("Donor".equalsIgnoreCase(userType)) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             } else {
-                startActivity(new Intent(LoginActivity.this, AboutActivity.class));
+                startActivity(new Intent(LoginActivity.this, OrphanageActivity.class));
             }
             finish(); // redirect without login
             return;
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 startActivity(intent);
                                                 finish();
                                             } else {
-                                                Intent intent = new Intent(LoginActivity.this, AboutActivity.class);
+                                                Intent intent = new Intent(LoginActivity.this, OrphanageActivity.class);
                                                 intent.putExtra("userType", "Orphanage");
                                                 intent.putExtra("userId", userIdFb);
                                                 startActivity(intent);

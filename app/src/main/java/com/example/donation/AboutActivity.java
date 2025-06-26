@@ -1,24 +1,33 @@
 package com.example.donation;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.appcompat.widget.Toolbar;
 
 public class AboutActivity extends AppCompatActivity {
+
+    ImageButton backToMainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_about);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setContentView(R.layout.activity_about); // replace with your actual layout file
+        Toolbar toolbar = findViewById(R.id.about_toolbar);
+        setSupportActionBar(toolbar);
+
+        // Enable the back arrow
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("About");
+        }
+        // Handle back arrow click
+        toolbar.setNavigationOnClickListener(v -> finish());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed(); // Default behavior (also goes back)
     }
 }

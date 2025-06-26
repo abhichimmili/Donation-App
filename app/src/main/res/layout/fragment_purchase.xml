@@ -76,5 +76,4 @@
         android:textSize="12sp"
         android:textStyle="bold"
         android:elevation="16dp" />
-
 </RelativeLayout>

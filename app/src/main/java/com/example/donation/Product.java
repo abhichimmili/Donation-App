@@ -15,6 +15,25 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setImageUrl(int imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public int getId() {
         return id;
