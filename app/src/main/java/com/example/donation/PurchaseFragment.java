@@ -176,6 +176,7 @@ public class PurchaseFragment extends Fragment implements ProductAdapter.OnAddTo
         checkoutButton.setOnClickListener(v -> {
             Log.d(TAG, "Checkout button clicked.");
             if (!cart.isEmpty()) {
+
                 showMessageBox("Checkout", "Thank you for your purchase! (This is a demo, no actual transaction occurs).");
                 cart.clear(); // Clear cart after "checkout"
                 updateCartUI(); // Update UI after clearing cart

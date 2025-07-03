@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -123,6 +124,17 @@ public class LoginActivity extends AppCompatActivity {
                                                 startActivity(intent);
                                                 finish();
                                             } else {
+                                                FirebaseMessaging.getInstance().getToken()
+                                                        .addOnCompleteListener(tokenTask -> {
+                                                            if (tokenTask.isSuccessful()) {
+                                                                String token = tokenTask.getResult();
+                                                                FirebaseDatabase.getInstance().getReference("Users")
+                                                                        .child("Orphanage")
+                                                                        .child(userIdFb)
+                                                                        .child("fcmToken")
+                                                                        .setValue(token);
+                                                            }
+                                                        });
                                                 Intent intent = new Intent(LoginActivity.this, OrphanageActivity.class);
                                                 intent.putExtra("userType", "Orphanage");
                                                 intent.putExtra("userId", userIdFb);

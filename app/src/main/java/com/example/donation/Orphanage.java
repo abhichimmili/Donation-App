@@ -1,10 +1,11 @@
 package com.example.donation;
 public class Orphanage {
     private String orphanageName, regNumber,password , contactPerson, orphanageAddress, orphanagePhone, email, userType;
+    public double latitude, longitude;
 
     public Orphanage() {}  // Needed for Firebase
 
-    public Orphanage(String orphanageName, String regNumber,String password , String contactPerson, String orphanageAddress, String orphanagePhone, String email, String userType) {
+    public Orphanage(String orphanageName, String regNumber,String password , String contactPerson, String orphanageAddress, String orphanagePhone, String email, String userType,double latitude, double longitude) {
         this.orphanageName = orphanageName;
         this.regNumber = regNumber;
         this.password = password;
@@ -13,6 +14,8 @@ public class Orphanage {
         this.orphanagePhone = orphanagePhone;
         this.email = email;
         this.userType = userType;
+        this.longitude=longitude;
+        this.latitude=latitude;
     }
 
     // Add public getters (and setters if needed)

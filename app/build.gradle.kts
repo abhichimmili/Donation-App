@@ -33,18 +33,30 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
-    implementation(libs.circleimageview)
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.database)
-    implementation(libs.cardview)
-    implementation(libs.play.services.location)
-    implementation(libs.glide)
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    // Core Android Libraries
+    implementation(libs.appcompat)                      // AndroidX AppCompat
+    implementation(libs.activity)                       // Activity lifecycle support
+    implementation(libs.constraintlayout)               // ConstraintLayout for complex UIs
+    implementation(libs.material)                       // Google Material Components
+    implementation(libs.androidx.preference)            // Preferences screen support
+
+    // UI Components & Image Handling
+    implementation(libs.cardview)                       // CardView for cards UI
+    implementation(libs.circleimageview)                // Circular ImageView (e.g., profile pics)
+    implementation(libs.glide)                          // Glide for image loading
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")  // Glide annotation processor
+
+    // Firebase Services
+    implementation(libs.firebase.auth)                  // Firebase Authentication
+    implementation(libs.firebase.database)              // Firebase Realtime Database
+    implementation(libs.firebase.messaging)             // Firebase Cloud Messaging (push notifications)
+
+    // Location & Maps
+    implementation(libs.play.services.location)         // Google Play Services Location API
+    implementation(libs.osmdroid.android)               // OpenStreetMap (OSMDroid)
+
+    // Testing Libraries
+    testImplementation(libs.junit)                      // Unit testing
+    androidTestImplementation(libs.ext.junit)           // AndroidX JUnit extensions
+    androidTestImplementation(libs.espresso.core)       // Espresso for UI testing
 }

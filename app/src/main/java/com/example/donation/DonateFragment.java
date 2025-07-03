@@ -39,6 +39,11 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,6 +84,7 @@ public class DonateFragment extends Fragment {
         double latitude;
         double longitude;
         String description;
+        String userId;
 
         public Orphanage(String name, String address, double latitude, double longitude, String description) {
             this.name = name;
@@ -86,9 +92,10 @@ public class DonateFragment extends Fragment {
             this.latitude = latitude;
             this.longitude = longitude;
             this.description = description;
+            this.userId = null;
         }
     }
-    private List<Orphanage> allOrphanages = Arrays.asList(
+    private List<Orphanage> allOrphanages =new ArrayList<>( Arrays.asList(
             new Orphanage("Hopeful Hearts Orphanage",
                     "123 Main St",
                     17.6868,
@@ -152,7 +159,7 @@ public class DonateFragment extends Fragment {
                     15.003699063092336,
                     79.6867315186228,
                     "Fostering hope and education for every child."
-            ));
+            )));
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -280,7 +287,63 @@ public class DonateFragment extends Fragment {
                 }
             }
         });
+        getAndDisplayNearbyOrphanages();
     }
+    private void fetchOrphanagesFromFirebase(Location location) {
+
+        Log.d("FIREBASE_FETCH", "Started fetching orphanages...");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child("Orphanage");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    try {
+                        String uid = child.getKey();
+                        String name = child.child("orphanageName").getValue(String.class);
+                        String address = child.child("orphanageAddress").getValue(String.class);
+                        Double lat = child.child("latitude").getValue(Double.class);
+                        Double lon = child.child("longitude").getValue(Double.class);
+                        Log.d("FIREBASE_FETCH", "Fetched values - name: " + name + ", address: " + address + ", lat: " + lat + ", lon: " + lon);
+                        if (name != null && address != null && lat != null && lon != null) {
+                            String description = "Serving the community with care.";
+                            Orphanage o = new Orphanage(name, address, lat, lon, description);
+                            o.userId = child.getKey();
+                            if (!isDuplicate(o)) {
+                                allOrphanages.add(o);
+                                Log.d("FIREBASE_FETCH", "Added: " + name);
+                            } else {
+                                Log.d("FIREBASE_FETCH", "Duplicate skipped: " + name);
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.e("FirebaseError", "Error parsing orphanage: " + e.getMessage());
+                    }
+                }
+                Log.d("FIREBASE_FETCH", "Calling displayNearbyOrphanages after fetch.");
+                if (location != null) {
+                    displayNearbyOrphanages(location);
+                } else {
+                    displayAllOrphanagesFallback();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "DB error: " + error.getMessage());
+            }
+        });
+    }
+    private boolean isDuplicate(Orphanage newOrphanage) {
+        for (Orphanage existing : allOrphanages) {
+            if (existing.name.equalsIgnoreCase(newOrphanage.name)
+                    && existing.address.equalsIgnoreCase(newOrphanage.address)) {
+                return true; // It's a duplicate
+            }
+        }
+        return false; // It's new
+    }
+
+
     private void handleDonationTypeClick(String type) {
         selectedDonationType = type;
         layout.setVisibility(GONE);
@@ -338,7 +401,7 @@ public class DonateFragment extends Fragment {
                 if (location != null) {
                     currentLocation = location;
                     Log.d("Location", "Last known location: " + location.getLatitude() + ", " + location.getLongitude());
-                    displayNearbyOrphanages(location);
+                    fetchOrphanagesFromFirebase(location);
                 } else {
                     Log.w("Location", "Last known location is null. Requesting new updates.");
                     // If last location is null, request location updates
@@ -467,9 +530,15 @@ public class DonateFragment extends Fragment {
     private void renderDonationDetailsScreen() {
         donationHeader.setText("Donate " + capitalize(selectedDonationType));
         donationContentContainer.removeAllViews(); // Clear previous content
-
+        Orphanage selected = null;
+        for (Orphanage o : allOrphanages) {
+            if (o.name.equals(selectedOrphanageName)) {
+                selected = o;
+                break;
+            }
+        }
         LayoutInflater inflater = LayoutInflater.from(requireActivity());
-
+        Orphanage finalSelected = selected;
         if ("funds".equals(selectedDonationType)) {
             View fundsLayout = inflater.inflate(R.layout.layout_donate_funds, donationContentContainer, false);
 
@@ -494,6 +563,16 @@ public class DonateFragment extends Fragment {
                     Toast.makeText(requireActivity(), "Please enter an amount.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (finalSelected != null && finalSelected.userId != null) {
+                    DatabaseReference notifRef = FirebaseDatabase.getInstance()
+                            .getReference("Notifications")
+                            .child(finalSelected.userId).child("History");
+
+                    String notifId = notifRef.push().getKey();
+
+                    notifRef.child(notifId).setValue("$" + amount );
+                }
+
                 // Simulate payment processing
                 Toast.makeText(requireActivity(), "Donating $" + amount + " to " + selectedOrphanageName, Toast.LENGTH_LONG).show();
                 // Optionally go back to main or show a thank you screen
@@ -516,6 +595,15 @@ public class DonateFragment extends Fragment {
                 if (description.isEmpty()) {
                     Toast.makeText(requireActivity(), "Please describe your donation.", Toast.LENGTH_SHORT).show();
                     return;
+                }
+                if (finalSelected != null && finalSelected.userId != null) {
+                    DatabaseReference notifRef = FirebaseDatabase.getInstance()
+                            .getReference("Notifications")
+                            .child(finalSelected.userId).child("History");
+
+                    String notifId = notifRef.push().getKey();
+
+                    notifRef.child(notifId).setValue( selectedDonationType+" - "+description);
                 }
                 Toast.makeText(requireActivity(), "Confirmed donation of " + description + " (" + selectedDonationType + ") to " + selectedOrphanageName, Toast.LENGTH_LONG).show();
                 // Optionally go back to main or show a thank you screen

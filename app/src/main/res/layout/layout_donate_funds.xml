@@ -87,7 +87,7 @@
             android:layout_weight="1"
             android:text="$100"
             android:textColor="#333333"
-            android:textSize="14sp"
+            android:textSize="13sp"
             app:backgroundTint="#ffd600"
             app:cornerRadius="8dp" />
     </LinearLayout>

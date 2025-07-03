@@ -115,7 +115,6 @@ public class OrphanageActivity extends AppCompatActivity {
                     startActivity(new Intent(OrphanageActivity.this, LoginActivity.class));
                     finish();
                 }
-
                 drawerLayout.closeDrawers();
                 return true;
             }
@@ -270,7 +269,8 @@ public class OrphanageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull android.view.MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_notification) {
-            Toast.makeText(this, "No New Notifications", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, NotificationActivity.class);
+            startActivity(intent);
             return true;
         }
         if (toggle.onOptionsItemSelected(item)) {

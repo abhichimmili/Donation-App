@@ -18,6 +18,9 @@ appcompatVersion = "1.7.1"
 playServicesLocation = "21.3.0"
 glide = "5.0.0-rc01"
 compiler = "4.16.0'"
+osmdroidAndroid = "6.1.20"
+preference = "1.2.1"
+firebaseMessaging = "24.1.2"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -38,6 +41,9 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 compiler = { group = "annotationProcessor 'com.github.bumptech.glide", name = "compiler", version.ref = "compiler" }
+osmdroid-android = { group = "org.osmdroid", name = "osmdroid-android", version.ref = "osmdroidAndroid" }
+androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

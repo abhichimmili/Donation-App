@@ -2,7 +2,7 @@ package com.example.donation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +21,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText editTextRegEmail;
@@ -51,6 +58,9 @@ public class RegisterActivity extends AppCompatActivity {
     private String selectedUserType = "Donor";
     private FirebaseAuth mAuth;
     private DatabaseReference databaseRef; // Realtime DB
+    private MapView osmMap;
+    private GeoPoint selectedGeoPoint = null;
+
 
 
     @Override
@@ -111,6 +121,39 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+        Configuration.getInstance().load(getApplicationContext(),
+                androidx.preference.PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+
+        osmMap = findViewById(R.id.osmMap);
+        osmMap.setTileSource(TileSourceFactory.MAPNIK);
+        osmMap.setMultiTouchControls(true);
+        osmMap.getController().setZoom(5.0);
+        osmMap.getController().setCenter(new GeoPoint(20.5937, 78.9629)); // India
+
+        osmMap.setOnTouchListener((v, event) -> false); // Ensure map scrolls inside ScrollView
+
+        osmMap.getOverlays().add(new Overlay() {
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
+                GeoPoint tappedPoint = (GeoPoint) mapView.getProjection().fromPixels((int) e.getX(), (int) e.getY());
+                selectedGeoPoint = tappedPoint;
+
+                mapView.getOverlays().clear(); // Remove previous marker
+
+                Marker marker = new Marker(mapView);
+                marker.setPosition(tappedPoint);
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+                marker.setTitle("Selected Location");
+                mapView.getOverlays().add(marker);
+                mapView.invalidate();
+
+                Toast.makeText(RegisterActivity.this, "Location selected: " +
+                        tappedPoint.getLatitude() + ", " + tappedPoint.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        });
+
         // Set click listener for the Register button
         buttonRegister.setOnClickListener(v -> {
             // Get common fields
@@ -136,6 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
+
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             String userId = firebaseUser.getUid();
@@ -175,7 +219,12 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(this, "Please fill in all orphanage details", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                                Orphanage orphanage = new Orphanage(orphanageName, regNumber,password, contactPerson, orphanageAddress, orphanagePhone, email, selectedUserType);
+                                if (selectedGeoPoint == null) {
+                                    Toast.makeText(this, "Please select your location on the map", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                Orphanage orphanage = new Orphanage(orphanageName, regNumber,password, contactPerson, orphanageAddress, orphanagePhone, email, selectedUserType,
+                                        selectedGeoPoint.getLatitude(), selectedGeoPoint.getLongitude());
                                 databaseRef.child(selectedUserType).child(userId).setValue(orphanage).addOnCompleteListener(dbTask -> {
                                     if (dbTask.isSuccessful()) {
                                         Toast.makeText(this, selectedUserType + " registration successful", Toast.LENGTH_LONG).show();

@@ -182,7 +182,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <EditText
                         android:id="@+id/editTextOrphanageName"
@@ -260,6 +260,12 @@
                         android:minLines="2"
                         android:maxLines="4"
                         android:gravity="top|start"/>
+                    <org.osmdroid.views.MapView
+                        android:id="@+id/osmMap"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="16dp" />
+
                 </LinearLayout>
 
                 <Button

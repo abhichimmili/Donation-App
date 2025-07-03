@@ -152,7 +152,6 @@
                 android:textColor="#333333"
                 android:layout_marginStart="16dp" />
         </LinearLayout>
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
